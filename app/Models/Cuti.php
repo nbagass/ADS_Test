@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Cuti extends Model
 {
@@ -16,6 +17,10 @@ class Cuti extends Model
         'lama_cuti',
         'keterangan'
     ];
+
+    public static function viewCuti(){
+        return DB::select("CALL spCuti()");
+    }
 
     public function karyawan():BelongsTo
     {

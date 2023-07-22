@@ -12,6 +12,17 @@ return new class extends Migration
      */
     public function up(): void
     {
+         //View Cuti
+        $viewCuti='
+        CREATE PROCEDURE spCuti()
+        BEGIN
+        SELECT CONCAT("IP6", LPAD(nomor_induk, 3, "0")) AS nomor_induk, tanggal_cuti, lama_cuti, keterangan
+        FROM cutis
+        ORDER BY tanggal_cuti ASC;
+        END
+        ';
+        DB::statement($viewCuti);
+
         //Create / Insert Karyawan
         $insert = '
         CREATE PROCEDURE spAddKaryawan(
@@ -66,6 +77,7 @@ return new class extends Migration
         END
         ';
         DB::statement($delete);
+
 
     }
 
